@@ -1,16 +1,15 @@
 import os
 
-from flask import Flask, url_for
+from flask import Flask, url_for, render_template
 
 
 app = Flask(__name__)
 
 @app.route('/')
-@app.route('/image')
 def image():
-    return '''<img src="{}" alt="здесь должна была быть картинка, 
-    но не нашлась">'''.format(url_for('static', filename='img/stay away.jpg'))
+    return render_template("main.html")
 
 
 if __name__ == '__main__':
-    app.run()
+    port = int(os.environ.get('PORT', 3000))
+    app.run(host='0.0.0.0', port=port)
